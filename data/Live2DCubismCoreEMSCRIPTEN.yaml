@@ -1,0 +1,23 @@
+functions:
+  - entry: csmMallocMoc
+    doc: Allocates uninitialized memory for moc.
+    class: Memory
+    args:
+      - doc: Moc size
+        name: mocSize
+        type: Uint32
+    return:
+      doc: Uninitialized memory for moc.
+      type: Memory
+  - entry: csmMallocModelAndInitialize
+    doc: Allocates memory for moc instance and instantiates it.
+    class: Memory
+    args:
+      - type: Moc
+    return:
+      type: Model
+  - entry: csmFree
+    doc: Deallocates memory
+    class: Memory
+    args:
+      - type: Memory

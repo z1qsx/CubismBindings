@@ -1,0 +1,330 @@
+enums:
+  - doc: Alignment constraints.
+    entries:
+      - name: csmAlignofMoc
+        doc: Necessary alignment for mocs (in bytes).
+        value: 64
+      - name: csmAlignofModel
+        doc: Necessary alignment for models (in bytes).
+        value: 16
+flags:
+  - doc: Constant drawable flag bits.
+    entries:
+      - name: csmBlendAdditive
+        doc: Additive blend mode bit.
+      - name: csmBlendMultiplicative
+        doc: Multiplicative blend mode bit.
+      - name: csmIsDoubleSided
+        doc: Double-sidedness bit.
+  - doc: Dynamic drawable flag bits.
+    entries:
+      - name: csmIsVisible
+        doc: Bit set when visible.
+      - name: csmVisibilityDidChange
+        doc: Bit set when visibility did change.
+      - name: csmOpacityDidChange
+        doc: Bit set when opacity did change.
+      - name: csmDrawOrderDidChange
+        doc: Bit set when draw order did change.
+      - name: csmRenderOrderDidChange
+        doc: Bit set when render order did change.
+      - name: csmVertexPositionsDidChange
+        doc: Flag set when vertex positions did change.
+functions:
+  # TODO Add 'csmGetVersion'
+  # TODO Add 'csmGetLogFunction'
+  # TODO Add 'csmSetLogFunction'
+  # Moc.
+  - entry: csmGetSizeofModel
+    doc: Gets Size of model instance (in bytes)
+    class: Moc
+    args:
+      - type: Moc
+        const: true
+    return:
+      doc: Size
+      type: Uint32
+  - entry: csmReviveMocInPlace
+    doc: Revives moc in place
+    class: Moc
+    args:
+      - doc: Memory containing moc data
+        type: memory
+        align: 64
+        size: ${fileSize}
+      - doc: Moc size
+        name: mocSize
+        type: Uint32
+    return:
+      type: Moc
+  - entry: csmInitializeModelInPlace
+    doc: Instantiates moc in place
+    class: Moc
+    args:
+      - type: Moc
+        const: true
+      - type: memory
+        align: 16
+        size: csmGetSizeofModel
+      - doc: Size of model instance
+        name: modelSize
+        type: Uint32
+        const: true
+    return:
+      type: Model
+  # Model.
+  # TODO Add 'csmReadCanvasInfo'
+  - entry: csmUpdateModel
+    doc: Updates model
+    class: Model
+    args:
+      - type: Model
+  # Parameters.
+  - entry: csmGetParameterCount
+    doc: Gets parameter count
+    class: Parameters
+    args:
+      - type: Model
+        const: true
+    return:
+      doc: Count
+      type: Int32
+  - entry: csmGetParameterIds
+    doc: Gets parameter IDs
+    class: Parameters
+    args:
+      - type: Model
+        const: true
+    return:
+      doc: IDs
+      type: StringArray
+      const: true
+      length: csmGetParameterCount
+  - entry: csmGetParameterMinimumValues
+    doc: Gets minimum parameter values
+    class: Parameters
+    args:
+      - type: Model
+    return:
+      doc: Minimum values
+      type: Float32Array
+      const: true
+      length: csmGetParameterCount
+  - entry: csmGetParameterMaximumValues
+    doc: Gets maximum parameter values
+    class: Parameters
+    args:
+      - type: Model
+    return:
+      doc: Maximum values
+      type: Float32Array
+      const: true
+      length: csmGetParameterCount
+  - entry: csmGetParameterDefaultValues
+    doc: Gets default parameter values
+    class: Parameters
+    args:
+      - type: Model
+    return:
+      doc: Default values
+      type: Float32Array
+      const: true
+      length: csmGetParameterCount
+  - entry: csmGetParameterValues
+    doc: Gets parameter values
+    class: Parameters
+    args:
+      - type: Model
+    return:
+      doc: Values
+      type: Float32Array
+      length: csmGetParameterCount
+  # Parts.
+  - entry: csmGetPartCount
+    doc: Gets part count
+    class: Parts
+    args:
+      - type: Model
+        const: true
+    return:
+      doc: Count
+      type: Int32
+  - entry: csmGetPartIds
+    doc: Gets part IDs
+    class: Parts
+    args:
+      - type: Model
+        const: true
+    return:
+      doc: IDs
+      type: StringArray
+      const: true
+      length: csmGetPartCount
+  - entry: csmGetPartOpacities
+    doc: Gets opacity values
+    class: Parts
+    args:
+      - type: Model
+    return:
+      doc: Opacity values
+      type: Float32Array
+      length: csmGetPartCount
+  # Drawables.
+  - entry: csmGetDrawableCount
+    doc: Gets drawable count
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Count
+      type: Int32
+  - entry: csmGetDrawableIds
+    doc: Gets drawable IDs
+    class: Drawables
+    args:
+      - type: Model
+        const: true
+    return:
+      doc: IDs
+      type: StringArray
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableConstantFlags
+    doc: Gets constant drawable flags.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Flags
+      type: Uint8Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableDynamicFlags
+    doc: Gets dynamic drawable flags.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Flags
+      type: Uint8Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableTextureIndices
+    doc: Gets drawable texture indices.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Indices
+      type: Int32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableDrawOrders
+    doc: Gets drawable draw orders.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Orders
+      type: Int32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableRenderOrders
+    doc: Gets drawable render orders.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Orders
+      type: Int32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableOpacities
+    doc: Gets drawable opacities.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Opacities
+      type: Float32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableMaskCounts
+    doc: Gets mask count for each drawable
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      doc: Counts
+      type: Int32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableMasks
+    doc: Gets masks for each drawable
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      docs: Masks
+      type: Int32Array2
+      const: true
+      length: csmGetDrawableCount
+      length2: csmGetDrawableMaskCounts
+  - entry: csmGetDrawableVertexCounts
+    doc: Gets number of vertices of each drawable.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      docs: Count
+      type: Int32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableVertexPositions
+    doc: Gets vertex position data of each drawable.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      docs: Positions
+      type: Float32Array2
+      const: true
+      length: csmGetDrawableCount
+      length2: csmGetDrawableVertexCounts * 2
+  - entry: csmGetDrawableVertexUvs
+    doc: Gets texture coordinate data of each drawables.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      docs: Coordinates
+      type: Float32Array2
+      const: true
+      length: csmGetDrawableCount
+      length2: csmGetDrawableVertexCounts * 2
+  - entry: csmGetDrawableIndexCounts
+    doc: Gets number of triangle indices for each drawable.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      docs: Masks
+      type: Int32Array
+      const: true
+      length: csmGetDrawableCount
+  - entry: csmGetDrawableIndices
+    doc: Gets triangle index data for each drawable.
+    class: Drawables
+    args:
+      - type: Model
+    return:
+      docs: Masks
+      type: Uint16Array2
+      const: true
+      length: csmGetDrawableCount
+      length2: csmGetDrawableIndexCounts
+  - entry: csmResetDrawableDynamicFlags
+    doc: Resets all dynamic drawable flags.
+    class: Drawables
+    args:
+      - type: Model
