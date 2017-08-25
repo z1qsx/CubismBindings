@@ -17,7 +17,7 @@ namespace Live2D.Cubism.Core.Unmanaged
     /// <summary>
     /// {{{Name}}} array view.
     /// </summary>
-    public struct CubismUnmanaged{{{Name}}}ArrayView
+    public sealed class CubismUnmanaged{{{Name}}}ArrayView
     {
         /// <summary>
         /// Array length of unmanaged buffer.
