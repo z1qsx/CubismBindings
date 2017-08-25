@@ -46,6 +46,13 @@ The generator involves a few steps:
 1. Run `python ./out/js/make.py --coredir <path-to-Cubism-SDK-Core-directory>`. This will output the final library and *TypeScript* declarations to `./out/js/out`.
 
 
+### C#
+
+### Usage
+
+1. Run `python ./gencs.py`. By default, this will output artefacts to `./out/cs`.
+
+
 ## Contributing
 
 There are many ways to contribute to the project: logging bugs, submitting pull requests, reporting issues, and creating suggestions.
@@ -58,7 +65,7 @@ Please limit the discussion to English and keep it professional and things on to
 
 ## TODO
 
-- Add C# bindings generator.
+- Investigate framework generators.
 
 ## License
 

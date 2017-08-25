@@ -146,11 +146,18 @@ def _patchdata(data):
     """Patches YAML data."""
     # Initializes additional containers.
     clsmap = {}
-    # TODO Patch enums.
+    # Patch enums.
+    for enum in data['enums']:
+        for entry in enum['entries']:
+            valuename = entry['name'].replace('csm', '')
+            entry['valuedoc'] = entry['doc']
+            entry['valuename'] = valuename[0].lower() + valuename[1:]
+            entry['Valuename'] = valuename
     # Patch flags.
     for flags in data['flags']:
         for i, entry in enumerate(flags['entries']):
             flagname = entry['name'].replace('csm', '')
+            entry['flagdoc'] = entry['doc']
             entry['flagname'] = flagname[0].lower() + flagname[1:]
             entry['Flagname'] = flagname
             entry['flagindex'] = i
@@ -177,11 +184,13 @@ def _patchdata(data):
         if _isproperty(func):
             func['propdoc'] = _topropdoc(func)
             func['propname'] = _topropname(func)
+            func['Propname'] = func['propname'][0].upper() + func['propname'][1:]
             cls['hasprops'] = True
             cls['props'].append(func)
         else:
             func['funcdoc'] = _tofuncdoc(func)
             func['funcname'] = _tofuncname(func)
+            func['Funcname'] = func['funcname'][0].upper() + func['funcname'][1:]
             cls['hasfuncs'] = True
             cls['funcs'].append(func)
     # Provide shorthand for functions
