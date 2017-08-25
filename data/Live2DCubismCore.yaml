@@ -36,7 +36,7 @@ functions:
   # TODO Add 'csmSetLogFunction'
   # Moc.
   - entry: csmGetSizeofModel
-    doc: Gets Size of model instance (in bytes)
+    doc: Gets Size of model instance (in bytes).
     class: Moc
     args:
       - type: Moc
@@ -45,11 +45,11 @@ functions:
       doc: Size
       type: Uint32
   - entry: csmReviveMocInPlace
-    doc: Revives moc in place
+    doc: Revives moc in place.
     class: Moc
     args:
-      - doc: Memory containing moc data
-        type: memory
+      - doc: Memory containing moc data.
+        type: Memory
         align: 64
         size: ${fileSize}
       - doc: Moc size
@@ -58,15 +58,15 @@ functions:
     return:
       type: Moc
   - entry: csmInitializeModelInPlace
-    doc: Instantiates moc in place
+    doc: Instantiates moc in place.
     class: Moc
     args:
       - type: Moc
         const: true
-      - type: memory
+      - type: Memory
         align: 16
         size: csmGetSizeofModel
-      - doc: Size of model instance
+      - doc: Size of model instance.
         name: modelSize
         type: Uint32
         const: true
@@ -75,22 +75,22 @@ functions:
   # Model.
   # TODO Add 'csmReadCanvasInfo'
   - entry: csmUpdateModel
-    doc: Updates model
+    doc: Updates model.
     class: Model
     args:
       - type: Model
   # Parameters.
   - entry: csmGetParameterCount
-    doc: Gets parameter count
+    doc: Gets parameter count.
     class: Parameters
     args:
       - type: Model
         const: true
     return:
-      doc: Count
+      doc: Count.
       type: Int32
   - entry: csmGetParameterIds
-    doc: Gets parameter IDs
+    doc: Gets parameter IDs.
     class: Parameters
     args:
       - type: Model
@@ -101,7 +101,7 @@ functions:
       const: true
       length: csmGetParameterCount
   - entry: csmGetParameterMinimumValues
-    doc: Gets minimum parameter values
+    doc: Gets minimum parameter values.
     class: Parameters
     args:
       - type: Model
@@ -111,7 +111,7 @@ functions:
       const: true
       length: csmGetParameterCount
   - entry: csmGetParameterMaximumValues
-    doc: Gets maximum parameter values
+    doc: Gets maximum parameter values.
     class: Parameters
     args:
       - type: Model
@@ -121,47 +121,47 @@ functions:
       const: true
       length: csmGetParameterCount
   - entry: csmGetParameterDefaultValues
-    doc: Gets default parameter values
+    doc: Gets default parameter values.
     class: Parameters
     args:
       - type: Model
     return:
-      doc: Default values
+      doc: Default values.
       type: Float32Array
       const: true
       length: csmGetParameterCount
   - entry: csmGetParameterValues
-    doc: Gets parameter values
+    doc: Gets parameter values.
     class: Parameters
     args:
       - type: Model
     return:
-      doc: Values
+      doc: Values.
       type: Float32Array
       length: csmGetParameterCount
   # Parts.
   - entry: csmGetPartCount
-    doc: Gets part count
+    doc: Gets part count.
     class: Parts
     args:
       - type: Model
         const: true
     return:
-      doc: Count
+      doc: Count.
       type: Int32
   - entry: csmGetPartIds
-    doc: Gets part IDs
+    doc: Gets part IDs.
     class: Parts
     args:
       - type: Model
         const: true
     return:
-      doc: IDs
+      doc: IDs.
       type: StringArray
       const: true
       length: csmGetPartCount
   - entry: csmGetPartOpacities
-    doc: Gets opacity values
+    doc: Gets opacity values.
     class: Parts
     args:
       - type: Model
@@ -171,7 +171,7 @@ functions:
       length: csmGetPartCount
   # Drawables.
   - entry: csmGetDrawableCount
-    doc: Gets drawable count
+    doc: Gets drawable count.
     class: Drawables
     args:
       - type: Model
@@ -179,13 +179,13 @@ functions:
       doc: Count
       type: Int32
   - entry: csmGetDrawableIds
-    doc: Gets drawable IDs
+    doc: Gets drawable IDs.
     class: Drawables
     args:
       - type: Model
         const: true
     return:
-      doc: IDs
+      doc: IDs.
       type: StringArray
       const: true
       length: csmGetDrawableCount
@@ -215,7 +215,7 @@ functions:
     args:
       - type: Model
     return:
-      doc: Indices
+      doc: Indices.
       type: Int32Array
       const: true
       length: csmGetDrawableCount
@@ -225,7 +225,7 @@ functions:
     args:
       - type: Model
     return:
-      doc: Orders
+      doc: Orders.
       type: Int32Array
       const: true
       length: csmGetDrawableCount
@@ -235,7 +235,7 @@ functions:
     args:
       - type: Model
     return:
-      doc: Orders
+      doc: Orders.
       type: Int32Array
       const: true
       length: csmGetDrawableCount
@@ -245,27 +245,27 @@ functions:
     args:
       - type: Model
     return:
-      doc: Opacities
+      doc: Opacities.
       type: Float32Array
       const: true
       length: csmGetDrawableCount
   - entry: csmGetDrawableMaskCounts
-    doc: Gets mask count for each drawable
+    doc: Gets mask count for each drawable.
     class: Drawables
     args:
       - type: Model
     return:
-      doc: Counts
+      doc: Counts.
       type: Int32Array
       const: true
       length: csmGetDrawableCount
   - entry: csmGetDrawableMasks
-    doc: Gets masks for each drawable
+    doc: Gets masks for each drawable.
     class: Drawables
     args:
       - type: Model
     return:
-      docs: Masks
+      docs: Masks.
       type: Int32Array2
       const: true
       length: csmGetDrawableCount
@@ -276,23 +276,23 @@ functions:
     args:
       - type: Model
     return:
-      docs: Count
+      docs: Count.
       type: Int32Array
       const: true
       length: csmGetDrawableCount
   - entry: csmGetDrawableVertexPositions
-    doc: Gets vertex position data of each drawable.
+    doc: Gets 2D vertex position data of each drawable.
     class: Drawables
     args:
       - type: Model
     return:
-      docs: Positions
+      docs: Positions.
       type: Float32Array2
       const: true
       length: csmGetDrawableCount
       length2: csmGetDrawableVertexCounts * 2
   - entry: csmGetDrawableVertexUvs
-    doc: Gets texture coordinate data of each drawables.
+    doc: Gets 2D texture coordinate data of each drawables.
     class: Drawables
     args:
       - type: Model
@@ -308,7 +308,7 @@ functions:
     args:
       - type: Model
     return:
-      docs: Masks
+      docs: Count.
       type: Int32Array
       const: true
       length: csmGetDrawableCount
@@ -318,7 +318,7 @@ functions:
     args:
       - type: Model
     return:
-      docs: Masks
+      docs: Triangles.
       type: Uint16Array2
       const: true
       length: csmGetDrawableCount
