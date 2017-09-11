@@ -60,14 +60,18 @@ if __name__ == '__main__':
     emcmd.append(os.path.join(coredir, 'lib', 'experimental', 'emscripten', 'Live2DCubismCore.bc'))
     emcmd.append(os.path.join(indir, 'Live2DCubismCoreEMSCRIPTEN.c'))
     # ... and execute it.
-    call(emcmd, shell=True)
-
+    if os.name == 'nt':
+        call(emcmd, shell=True)
+    else:
+        call(emcmd)
 
     # Assemble and execute TypeScript command.
     tsccmd = ['tsc', os.path.join(indir, 'live2dcubismcore.ts'), '--outDir', outdir, '-D', '--sourceMap']
     # Execute TypeScript command.
-    call(tsccmd, shell=True)
-
+    if os.name == 'nt':
+        call(tsccmd, shell=True)
+    else:
+        call(tsccmd)
 
     # Merge JavaScript with Emscripten module.
     jsstream = open(os.path.join(outdir, 'live2dcubismcore.js'), 'r')
@@ -85,8 +89,11 @@ if __name__ == '__main__':
     if USER_OPTIONS['uglify']:
         # Assemble command and execute it.
         uglifycmd = ['uglifyjs', '--keep-fnames', '-o', os.path.join(outdir, 'live2dcubismcore.min.js'), os.path.join(outdir, 'live2dcubismcore.js')]
-        call(uglifycmd, shell=True)
-
+        
+        if os.name == 'nt':
+            call(uglifycmd, shell=True)
+        else:
+            call(uglifycmd)
 
     # Delete temporary directory.
     shutil.rmtree(tempdir, True)
