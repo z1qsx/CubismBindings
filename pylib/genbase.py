@@ -59,9 +59,8 @@ class GenBase(object):
 
 def _readcontents(path):
     """Reads file contents."""
-    stream = open(path, 'r')
-    contents = stream.read()
-    stream.close()
+    with open(path, 'r') as stream:
+        contents = stream.read()
     return contents
 
 
