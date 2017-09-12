@@ -22,16 +22,11 @@ namespace Live2D.Cubism.Core.Unmanaged
         /// <summary>
         /// Name of native DLL file.
         /// </summary>
-        {{#notgenerateunity}}
-        public const string DllName = "Live2DCubismCore";
-        {{/notgenerateunity}}
-        {{#generateunity}}
 #if (UNITY_IOS || UNITY_WEBGL || UNITY_SWITCH) && !UNITY_EDITOR
         public const string DllName = "__Internal";
 #else
         public const string DllName = "Live2DCubismCore";
 #endif
-        {{/generateunity}}
         {{#enums}}
 
 

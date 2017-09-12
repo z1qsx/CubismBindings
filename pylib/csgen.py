@@ -35,9 +35,6 @@ class CSGen(GenBase):
         options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedParts.cs'))
         # Let base initialize.
         super(CSGen, self).__init__(options)
-        # TOGGLE BETWEEN GENERATION FOR UNITY C# AND 'VANILLA' C#
-        # self.data['generateunity'] = True
-        self.data['notgenerateunity'] = True
         # Patch functions
         for func in self.data['funcs']:
             func['funccsentry'] = 'CubismCoreDll.' + func['entry'].replace('csm', '')
