@@ -6,7 +6,7 @@
 
 """Provides interface for generating C# bindings."""
 
-
+from __future__ import print_function
 import os
 from pylib.genbase import GenBase
 
@@ -131,7 +131,7 @@ def _todllentrytype(type):
         return 'uint'
     elif type == 'Float32':
         return 'float'
-    print type
+    print(type)
     assert(False)
 
 
@@ -172,5 +172,5 @@ def _tocstype(type):
         return 'uint'
     elif type == 'Float32':
         return 'float'
-    print type
+    print(type)
     assert(False)

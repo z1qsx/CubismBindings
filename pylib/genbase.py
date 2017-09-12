@@ -69,9 +69,8 @@ def _writecontents(contents, path):
     """Writes contents to file."""
     if not os.path.exists(os.path.dirname(path)):
         os.makedirs(os.path.dirname(path))
-    stream = open(path, 'w')
-    stream.write(contents)
-    stream.close()
+    with open(path, 'w') as stream:
+        stream.write(contents)
 
 
 def _topropname(func):
