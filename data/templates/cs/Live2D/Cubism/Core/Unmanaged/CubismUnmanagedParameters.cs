@@ -78,7 +78,7 @@ namespace Live2D.Cubism.Core.Unmanaged
             var _{{{propname}}} = (IntPtr *)({{{propget}}}(modelPtr));
             for (var i = 0; i < length; ++i)
             {
-                {{{Propname}}}[i] = Marshal.PtrToStringAnsi(_{{{propname}}}[1]);
+                {{{Propname}}}[i] = Marshal.PtrToStringAnsi(_{{{propname}}}[i]);
             }
             {{/stringarrayprops}}
 
