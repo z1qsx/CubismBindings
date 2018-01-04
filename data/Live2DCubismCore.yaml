@@ -73,12 +73,27 @@ functions:
     return:
       type: Model
   # Model.
-  # TODO Add 'csmReadCanvasInfo'
   - entry: csmUpdateModel
     doc: Updates model.
     class: Model
     args:
       - type: Model
+  - entry: csmReadCanvasInfo
+    doc: Reads info on a model canvas.
+    class: Model
+    args:
+      - doc: Model query.
+        type: Model
+        const: true
+      - doc: Canvas dimensions.
+        name: outSizeInPixels
+        type: Memory
+      - doc: Origin of model on canvas.
+        name: outOriginInPixels
+        type: Memory
+      - doc: Aspect used for scaling pixels to units.
+        name: outPixelsPerUnit
+        type: Memory
   # Parameters.
   - entry: csmGetParameterCount
     doc: Gets parameter count.

@@ -9,6 +9,7 @@
 
 
 using System;
+using System.Runtime.InteropServices;
 
 
 namespace Live2D.Cubism.Core.Unmanaged
@@ -58,6 +59,10 @@ namespace Live2D.Cubism.Core.Unmanaged
         /// </summary>
         public CubismUnmanagedDrawables Drawables { get; private set; }
 
+        /// <summary>
+        /// Unmanaged canvas information(size, origin, ppu).
+        /// </summary>
+        public CubismUnmanagedCanvasInfo CanvasInfo { get; private set; }
 
         /// <summary>
         /// Native model pointer.
@@ -132,8 +137,82 @@ namespace Live2D.Cubism.Core.Unmanaged
             Parameters = new CubismUnmanagedParameters(Ptr);
             Parts = new CubismUnmanagedParts(Ptr);
             Drawables = new CubismUnmanagedDrawables(Ptr);
+            CanvasInfo = new CubismUnmanagedCanvasInfo(Ptr);
         }
 
         #endregion
+    }
+
+
+    /// <summary>
+    /// Unmanaged canvas information interface.
+    /// </sumamry>
+    public sealed class CubismUnmanagedCanvasInfo
+    {
+        /// <summary>
+        /// Width of native model canvas.
+        /// </summary>
+        public float CanvasWidth { get; private set; }
+
+        /// <summary>
+        /// Height of native model canvas.
+        /// </summary>
+        public float CanvasHeight { get; private set; }
+
+        /// <summary>
+        /// Coordinate origin of X axis.
+        /// </summary>
+        public float CanvasOriginX { get; private set; }
+
+        /// <summary>
+        /// Coordinate origin of Y axis.
+        /// </summary>
+        public float CanvasOriginY { get; private set; }
+
+        /// <summary>
+        /// Pixels per unit of native model
+        /// </summary>
+        public float PixelsPerUnit { get; private set; }
+        
+        #region Ctors
+        
+        /// <summary>
+        /// Initializes instance.
+        /// </summary>
+        /// <param name="modelPtr"> Native model pointer. </param>
+        internal unsafe CubismUnmanagedCanvasInfo(IntPtr modelPtr)
+        {
+            if (modelPtr == IntPtr.Zero)
+            {
+                return;
+            }
+
+            float[] _sizeXY = new float[2];
+            float[] _originXY = new float[2];
+            float[] _ppu = new float[1];
+
+            IntPtr size_ptr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(float)) * 2);
+            IntPtr origin_ptr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(float)) * 2);
+            IntPtr ppu_ptr = Marshal.AllocCoTaskMem(Marshal.SizeOf(typeof(float)) * 1);
+
+            CubismCoreDll.ReadCanvasInfo(modelPtr, size_ptr, origin_ptr, ppu_ptr);
+
+            Marshal.Copy(size_ptr, _sizeXY, 0, 2);
+            Marshal.Copy(origin_ptr, _originXY, 0, 2);
+            Marshal.Copy(ppu_ptr, _ppu, 0, 1);
+
+            Marshal.FreeCoTaskMem(size_ptr);
+            Marshal.FreeCoTaskMem(origin_ptr);
+            Marshal.FreeCoTaskMem(ppu_ptr);
+
+            CanvasWidth = _sizeXY[0];
+            CanvasHeight = _sizeXY[1];
+            CanvasOriginX = _originXY[0];
+            CanvasOriginY = _originXY[1];
+            PixelsPerUnit = _ppu[0];
+        }
+
+        #endregion
+
     }
 }
