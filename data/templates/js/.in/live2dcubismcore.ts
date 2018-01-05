@@ -29,7 +29,6 @@ namespace LIVE2DCUBISMCORE {
         function ccall(ident: string, returnType: string, argTypes: string[], args: any[]): any;
         function cwrap(ident: string, returnType: string, argTypes: string[]): any;
         function Pointer_stringify(ptr: number, length?: number): string;
-
     }
 
 
@@ -171,39 +170,27 @@ namespace LIVE2DCUBISMCORE {
         }
     }
 
-    /**
-     * 
-     * Canvas information interface.
-     */
+    /** Canvas information interface. */
     export class CanvasInfo
     {
-        /**
-         * Width of native model canvas.
-         */
+        /** Width of native model canvas. */
         public CanvasWidth: number
 
-        /**
-         * Height of native model canvas.
-         */
+        /** Height of native model canvas. */
         public CanvasHeight: number
 
-        /**
-         * Coordinate origin of X axis.
-         */
+        /** Coordinate origin of X axis. */
         public CanvasOriginX: number
 
-        /**
-         * Coordinate origin of Y axis.
-         */
+        /** Coordinate origin of Y axis. */
         public CanvasOriginY: number
 
-        /**
-         * Pixels per unit of native model.
-         */
+        /** Pixels per unit of native model. */
         public PixelsPerUnit: number
         
         /**
          * Initializes instance.
+         * 
          * @param modelPtr Native model pointer.
          */
         public constructor(modelPtr: number)

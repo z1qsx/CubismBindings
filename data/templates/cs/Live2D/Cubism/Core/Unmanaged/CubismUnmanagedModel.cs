@@ -170,7 +170,7 @@ namespace Live2D.Cubism.Core.Unmanaged
         public float CanvasOriginY { get; private set; }
 
         /// <summary>
-        /// Pixels per unit of native model
+        /// Pixels per unit of native model.
         /// </summary>
         public float PixelsPerUnit { get; private set; }
         
