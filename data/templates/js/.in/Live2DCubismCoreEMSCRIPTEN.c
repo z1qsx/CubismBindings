@@ -70,6 +70,14 @@ csmModel* csmMallocModelAndInitialize(const csmMoc* moc)
     return model;
 }
 
+void* csmMalloc(const unsigned int size)
+{
+    void* memory;
+
+    memory = malloc(size);
+
+    return memory;
+}
 
 void csmFree(void *memory)
 {

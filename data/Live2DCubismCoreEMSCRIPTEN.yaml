@@ -16,6 +16,16 @@ functions:
       - type: Moc
     return:
       type: Model
+  - entry: csmMalloc
+    doc: Allocates memory data bytes.
+    class: Memory
+    args:
+      - doc: Allocation size per byte.
+        name: size
+        type: Uint32
+    return:
+      doc: Allocated memory.
+      type: Memory
   - entry: csmFree
     doc: Deallocates memory
     class: Memory
