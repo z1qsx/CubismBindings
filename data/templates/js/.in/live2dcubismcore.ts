@@ -29,6 +29,8 @@ namespace LIVE2DCUBISMCORE {
         function ccall(ident: string, returnType: string, argTypes: string[], args: any[]): any;
         function cwrap(ident: string, returnType: string, argTypes: string[]): any;
         function Pointer_stringify(ptr: number, length?: number): string;
+        function _malloc(dataBytes: number): any;
+        function _free(ptr: number): any;
     }
 
 
@@ -118,7 +120,8 @@ namespace LIVE2DCUBISMCORE {
         public parts: Parts;
         /** Drawables. */
         public drawables: Drawables;
-
+        /** Canvas information. */
+        public canvasinfo: CanvasInfo;
 
         /**
          * Creates [[Model]] from [[Moc]].
@@ -165,6 +168,87 @@ namespace LIVE2DCUBISMCORE {
             this.parameters = new Parameters(this._ptr);
             this.parts = new Parts(this._ptr);
             this.drawables = new Drawables(this._ptr);
+            this.canvasinfo = new CanvasInfo(this._ptr);
+        }
+    }
+
+    /**
+     * 
+     * Canvas information interface.
+     */
+    export class CanvasInfo
+    {
+        /**
+         * Width of native model canvas.
+         */
+        public CanvasWidth: number
+
+        /**
+         * Height of native model canvas.
+         */
+        public CanvasHeight: number
+
+        /**
+         * Coordinate origin of X axis.
+         */
+        public CanvasOriginX: number
+
+        /**
+         * Coordinate origin of Y axis.
+         */
+        public CanvasOriginY: number
+
+        /**
+         * Pixels per unit of native model.
+         */
+        public PixelsPerUnit: number
+        
+        /**
+         * Initializes instance.
+         * @param modelPtr Native model pointer.
+         */
+        public constructor(modelPtr: number)
+        {
+            if (!modelPtr) {
+                return;
+            }
+
+            // Preserve the pointer ant heap for get data throw args.
+            let _canvasSize_data = new Float32Array(2);
+            let _canvasSize_nDataBytes = _canvasSize_data.length * _canvasSize_data.BYTES_PER_ELEMENT;
+            let _canvasSize_dataPtr = _em._malloc(_canvasSize_nDataBytes);
+            let _canvasSize_dataHeap = new Uint8Array(_em.HEAPU8.buffer, _canvasSize_dataPtr, _canvasSize_nDataBytes);
+            _canvasSize_dataHeap.set(new Uint8Array(_canvasSize_data.buffer));
+
+            let _canvasOrigin_data = new Float32Array(2);
+            let _canvasOrigin_nDataBytes = _canvasOrigin_data.length * _canvasOrigin_data.BYTES_PER_ELEMENT;
+            let _canvasOrigin_dataPtr = _em._malloc(_canvasOrigin_nDataBytes);
+            let _canvasOrigin_dataHeap = new Uint8Array(_em.HEAPU8.buffer, _canvasOrigin_dataPtr, _canvasOrigin_nDataBytes);
+            _canvasOrigin_dataHeap.set(new Uint8Array(_canvasOrigin_data.buffer));
+
+            let _canvasPPU_data = new Float32Array(1);
+            let _canvasPPU_nDataBytes = _canvasPPU_data.length * _canvasPPU_data.BYTES_PER_ELEMENT;
+            let _canvasPPU_dataPtr = _em._malloc(_canvasPPU_nDataBytes);
+            let _canvasPPU_dataHeap = new Uint8Array(_em.HEAPU8.buffer, _canvasPPU_dataPtr, _canvasPPU_nDataBytes);
+            _canvasPPU_dataHeap.set(new Uint8Array(_canvasPPU_data.buffer));
+
+            // Call function and get result
+            _csm.readCanvasInfo(modelPtr, _canvasSize_dataHeap.byteOffset, _canvasOrigin_dataHeap.byteOffset, _canvasPPU_dataHeap.byteOffset);
+
+            _canvasSize_data = new Float32Array(_canvasSize_dataHeap.buffer, _canvasSize_dataHeap.byteOffset, _canvasSize_dataHeap.length);
+            _canvasOrigin_data = new Float32Array(_canvasOrigin_dataHeap.buffer, _canvasOrigin_dataHeap.byteOffset, _canvasOrigin_dataHeap.length);
+            _canvasPPU_data = new Float32Array(_canvasPPU_dataHeap.buffer, _canvasPPU_dataHeap.byteOffset, _canvasPPU_dataHeap.length);
+
+            this.CanvasWidth = _canvasSize_data[0];
+            this.CanvasHeight = _canvasSize_data[1];
+            this.CanvasOriginX = _canvasOrigin_data[0];
+            this.CanvasOriginY = _canvasOrigin_data[1];
+            this.PixelsPerUnit = _canvasPPU_data[0];
+
+            // Free heap memory
+            _em._free(_canvasSize_dataHeap.byteOffset);
+            _em._free(_canvasOrigin_dataHeap.byteOffset);
+            _em._free(_canvasPPU_dataHeap.byteOffset);
         }
     }
 
