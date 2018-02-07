@@ -31,6 +31,7 @@ class CSGen(GenBase):
         options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedMemory.cs'))
         options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedMoc.cs'))
         options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedModel.cs'))
+        options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedCanvasInformation.cs'))
         options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedParameters.cs'))
         options.infiles.append(os.path.join('cs', 'Live2D', 'Cubism', 'Core', 'Unmanaged', 'CubismUnmanagedParts.cs'))
         # Let base initialize.
