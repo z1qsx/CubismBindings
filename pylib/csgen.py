@@ -61,10 +61,10 @@ class CSGen(GenBase):
                 continue
             arrayviews[func['return']['type'].split('Array')[0]] = _toarrayviewdata(func)
         self.data['arrayviews'] = []
-        for view in arrayviews.itervalues():
+        for view in [item[1] for item in arrayviews.items()]:
             self.data['arrayviews'].append(view)
         # Patch props
-        for cls in self.data['clsmap'].itervalues():
+        for cls in [item[1] for item in self.data['clsmap'].items()]:
             for prop in cls['props']:
                 prop['propcstype'] = _tocstype(prop['proptype'])
                 prop['propget'] = prop['funccsentry']

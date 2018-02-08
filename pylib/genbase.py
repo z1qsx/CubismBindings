@@ -194,7 +194,7 @@ def _patchdata(data):
     # Provide shorthand for functions
     data['funcs'] = data['functions']
     # 'Sort' properties.
-    for cls in clsmap.itervalues():
+    for cls in [item[1] for item in clsmap.items()]:
         scalarprops = []
         scalararrayprops = []
         scalararray2props = []
