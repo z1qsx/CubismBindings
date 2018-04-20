@@ -55,7 +55,7 @@ The generator involves a few steps:
 
 ## Contributing
 
-There are many ways to contribute to the project: logging bugs, submitting pull requests, reporting issues, and creating suggestions.
+There are many ways to contribute to the project: logging bugs, submitting pull requests on this GitHub, and reporting issues and making suggestions at Live2D Community.
 
 
 ## Discussion Etiquette
