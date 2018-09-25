@@ -60,6 +60,8 @@ if __name__ == '__main__':
     emcmd.append(os.path.join(tempdir, '_em_module.js'))
     emcmd.append(os.path.join(coredir, 'lib', 'experimental', 'emscripten', 'Live2DCubismCore.bc'))
     emcmd.append(os.path.join(indir, 'Live2DCubismCoreEMSCRIPTEN.c'))
+    emcmd.append('-s')
+    emcmd.append('EXTRA_EXPORTED_RUNTIME_METHODS=[''ccall'', ''Pointer_stringify'']')
     # ... and execute it.
     if os.name == 'nt':
         call(emcmd, shell=True)
