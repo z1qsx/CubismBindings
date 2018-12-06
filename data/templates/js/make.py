@@ -64,6 +64,8 @@ if __name__ == '__main__':
     emcmd.append('EXTRA_EXPORTED_RUNTIME_METHODS=[''ccall'', ''Pointer_stringify'']')
     emcmd.append('-s')
     emcmd.append('WASM=0')
+    emcmd.append('-s')
+    emcmd.append('LEGACY_VM_SUPPORT=1')
 
     # ... and execute it.
     if os.name == 'nt':
