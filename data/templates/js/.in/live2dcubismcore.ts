@@ -290,7 +290,10 @@ namespace Live2DCubismCore {
             length = {{{propgetlength}}}(modelPtr);
             this.{{{propname}}} = new Array<string>(length);
             var _{{{propname}}} = new Uint32Array(_em.HEAPU32.buffer, {{{propget}}}(modelPtr), length{{{proplengthfactor}}});
-            _{{{propname}}}.forEach((p, i) => { this.{{{propname}}}[i] = _em.Pointer_stringify(p)})
+            for(let i: number = 0; i < _{{{propname}}}.length; i++)
+            {
+                this.{{{propname}}}[i] = _em.Pointer_stringify(_{{{propname}}}[i]);
+            }
             {{/stringarrayprops}}
             {{#scalararrayprops}}
 
@@ -303,7 +306,10 @@ namespace Live2DCubismCore {
             length2 = new Int32Array(_em.HEAP32.buffer, {{{propgetlength2}}}(modelPtr), length{{{proplengthfactor}}});
             this.{{{propname}}} = new {{{proptstype}}}(length);
             var _{{{propname}}} = new Uint32Array(_em.HEAPU32.buffer, {{{propget}}}(modelPtr), length{{{proplengthfactor}}});
-            _{{{propname}}}.forEach((p, i) => { this.{{{propname}}}[i] = new {{{proparray1tstype}}}({{{propemheapbuffer}}}, p, length2[i]{{{proplength2factor}}})});
+            for(let i: number = 0; i < _{{{propname}}}.length; i++)
+            {
+                this.{{{propname}}}[i] = new {{{proparray1tstype}}}({{{propemheapbuffer}}}, _{{{propname}}}[i], length2[i]{{{proplength2factor}}});
+            }
             {{/scalararray2props}}
         }
     }
