@@ -184,6 +184,17 @@ functions:
       doc: Opacity values
       type: Float32Array
       length: csmGetPartCount
+  - entry: csmGetPartParentPartIndices
+    doc: Gets part's parent part indices.
+    class: Parts
+    args:
+      - type: Model
+        const: true
+    return:
+      doc: Valid pointer on success; '0' otherwise.
+      type: Int32Array
+      const: true
+      length: csmGetPartCount
   # Drawables.
   - entry: csmGetDrawableCount
     doc: Gets drawable count.
