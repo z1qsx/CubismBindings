@@ -31,9 +31,19 @@ flags:
       - name: csmVertexPositionsDidChange
         doc: Flag set when vertex positions did change.
 functions:
-  # TODO Add 'csmGetVersion'
-  # TODO Add 'csmGetLogFunction'
-  # TODO Add 'csmSetLogFunction'
+  # Version.
+  - entry: csmGetVersion
+    doc: Queries Core version.
+    class: CubismVersion
+    return:
+      type: Uint32
+  # Logging.
+  - entry: csmSetLogFunction
+    doc: Sets log handler.
+    class: Logging
+    args:
+    - type: Uint32
+      name: handler
   # Moc.
   - entry: csmGetSizeofModel
     doc: Gets Size of model instance (in bytes).

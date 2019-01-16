@@ -29,6 +29,7 @@ namespace Live2DCubismCore {
         function ccall(ident: string, returnType: string, argTypes: string[], args: any[]): any;
         function cwrap(ident: string, returnType: string, argTypes: string[]): any;
         function Pointer_stringify(ptr: number, length?: number): string;
+        function addFunction(prt: Function, type?: string);
     }
 
 
@@ -53,6 +54,69 @@ namespace Live2DCubismCore {
             _em.ccall("{{{entry}}}", null, [{{{argTypes}}}], [{{{argNames}}}]);
         }
         {{/ccalls.void}}
+    }
+
+
+    /** Cubism version identifier. */
+    export declare type csmVersion = number;
+
+
+    /** Log handler.
+     * 
+     * @param message Null-terminated string message to log.
+     */
+    export interface csmLogFunction
+    {
+        (message: string): void
+    };
+
+
+    /** Cubism version. */
+    export class Version
+    {
+        /**
+         * Queries Core version.
+         * 
+         * @return Core version.
+         */
+        public static csmGetVersion(): csmVersion
+        {
+            return _csm.getVersion();
+        }
+
+        private constructor(){}
+    }
+
+
+    /** Cubism logging. */
+    export class Logging
+    {
+        private static logFunction: csmLogFunction;
+
+        /**
+         * Sets log handler.
+         * 
+         * @param handler  Handler to use.
+         */
+        public static csmSetLogFunction(handler: csmLogFunction): void
+        {
+            let pointer = _em.addFunction(handler, 'vi');
+            _csm.setLogFunction(pointer);
+            Logging.logFunction = handler;
+        }
+
+
+        /**
+         * Queries log handler.
+         * 
+         * @return Log handler.
+         */
+        public static csmGetLogFunction(): csmLogFunction
+        {
+            return Logging.logFunction;
+        }
+
+        private constructor(){}
     }
 
 
