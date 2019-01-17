@@ -100,9 +100,14 @@ namespace Live2DCubismCore {
          */
         public static csmSetLogFunction(handler: csmLogFunction): void
         {
-            let pointer = _em.addFunction(handler, 'vi');
-            _csm.setLogFunction(pointer);
+            // Cache log handler.
             Logging.logFunction = handler;
+
+            // Wrap function to pointer.
+            let pointer = _em.addFunction(Logging.wrapLogFunction, 'vi');
+
+            // Sets log handler.
+            _csm.setLogFunction(pointer);
         }
 
 
@@ -116,6 +121,22 @@ namespace Live2DCubismCore {
             return Logging.logFunction;
         }
 
+
+        /**
+         * Wrap log function.
+         * 
+         * @param messagePtr number
+         * 
+         * @return string
+         */
+        private static wrapLogFunction(messagePtr: number): void
+        {
+            // Pointer to string.
+            let messageStr = _em.Pointer_stringify(messagePtr);
+
+            // Run log function.
+            Logging.logFunction(messageStr);
+        }
         private constructor(){}
     }
 
