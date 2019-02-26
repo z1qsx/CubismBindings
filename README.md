@@ -38,6 +38,9 @@ The generator involves a few steps:
 1. [*Emscripten*](http://kripken.github.io/emscripten-site/)
 1. [*TypeScript*](https://www.typescriptlang.org/)
 1. [*Cubism SDK for Native*](https://live2d.github.io/#native)
+1. [*UglifyJS*](https://www.npmjs.com/package/uglify-js) *
+
+*In macOS or linux environments, it is necessary to obtain the file directly from (https://nodejs.org/en/) or install uglify-js by executing `npm install uglify-js -g`.
 
 
 #### Usage
