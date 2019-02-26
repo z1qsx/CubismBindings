@@ -28,7 +28,7 @@ namespace Live2DCubismCore {
 
         function ccall(ident: string, returnType: string, argTypes: string[], args: any[]): any;
         function cwrap(ident: string, returnType: string, argTypes: string[]): any;
-        function Pointer_stringify(ptr: number, length?: number): string;
+        function UTF8ToString(ptr: number, maxBytesToread?: number): string;
         function addFunction(prt: Function, type?: string);
     }
 
@@ -132,7 +132,7 @@ namespace Live2DCubismCore {
         private static wrapLogFunction(messagePtr: number): void
         {
             // Pointer to string.
-            let messageStr = _em.Pointer_stringify(messagePtr);
+            let messageStr = _em.UTF8ToString(messagePtr);
 
             // Run log function.
             Logging.logFunction(messageStr);
@@ -377,7 +377,7 @@ namespace Live2DCubismCore {
             var _{{{propname}}} = new Uint32Array(_em.HEAPU32.buffer, {{{propget}}}(modelPtr), length{{{proplengthfactor}}});
             for(let i: number = 0; i < _{{{propname}}}.length; i++)
             {
-                this.{{{propname}}}[i] = _em.Pointer_stringify(_{{{propname}}}[i]);
+                this.{{{propname}}}[i] = _em.UTF8ToString(_{{{propname}}}[i]);
             }
             {{/stringarrayprops}}
             {{#scalararrayprops}}
